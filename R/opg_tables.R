@@ -1,8 +1,8 @@
 build_opg_tables <- function() {
 
-cover_df <- read.csv("inst/extdata/cover.csv",check.names=FALSE)
-notes_df <- read.csv("inst/extdata/notes.csv",check.names=FALSE)
-tables_df <- read.csv("inst/extdata/contents.csv",check.names=FALSE)
+cover_df <- read.csv(system.file("pages/cover.csv", package = "opgstats"),check.names=FALSE)
+notes_df <- read.csv(system.file("pages/notes.csv", package = "opgstats"),check.names=FALSE)
+tables_df <- read.csv(system.file("pages/contents.csv", package = "opgstats"),check.names=FALSE)
 
 SQL <- "SELECT * FROM sirius_derived_dev_dbt.opg_family_court_stats_published"
 
