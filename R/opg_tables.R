@@ -1,4 +1,4 @@
-build_opg_tables <- function(SQL) {
+build_opg_tables <- function(SQL,outfile_s3bucket = "alpha-data-modelling-iceberg",outfile_filename) {
 
 cover_df <- read.csv(system.file("pages/cover.csv", package = "opgstats"),check.names=FALSE)
 notes_df <- read.csv(system.file("pages/notes.csv", package = "opgstats"),check.names=FALSE)
@@ -17,18 +17,21 @@ mojstats::build_stats_tables(data,
                    cover_df,
                    notes_df,
                    tables_df,
-                   "output.xlsx")
+                   outfile_s3bucket,
+                   outfile_filename)
 
 }
 
 build_published_opg_tables <- function() {
 
-  build_opg_tables("SELECT * FROM sirius_derived_dev_dbt.opg_family_court_stats_published")
+  build_opg_tables("SELECT * FROM sirius_derived_dev_dbt.opg_family_court_stats_published",
+                   outfile_filename = paste0("stats_automation_test/published_tables_", Sys.Date(), ".xlsx"))
 
 }
 
 build_latest_opg_tables <- function() {
 
-  build_opg_tables("SELECT * FROM sirius_derived_dev_dbt.opg_family_court_stats_latest")
+  build_opg_tables("SELECT * FROM sirius_derived_dev_dbt.opg_family_court_stats_latest",
+                   outfile_filename = paste0("stats_automation_test/latest_tables_", Sys.Date(), ".xlsx"))
 
 }
