@@ -11,5 +11,7 @@ Encoding: UTF-8
 LazyData: true
 Imports:
   mojstats
+Depends:
+  magrittr
 Remotes:
   moj-analytical-services/mojstats
